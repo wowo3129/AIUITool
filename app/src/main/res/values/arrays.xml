@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="accent">
+        <item>普通话</item>
+        <item>四川话</item>
+        <item>粤语</item>
+    </string-array>
+
+    <string-array name="accent_code">
+        <item>mandarin</item>
+        <item>lmz</item>
+        <item>cantonese</item>
+    </string-array>
+
+</resources>

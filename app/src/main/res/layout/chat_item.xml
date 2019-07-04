@@ -1,0 +1,140 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.util.LayoutDirection" />
+
+        <import type="com.daasuu.bl.ArrowDirection" />
+
+        <variable
+            name="msg"
+            type="com.iflytek.aiui.demo.chat.model.ChatMessage" />
+
+        <variable
+            name="binding"
+            type="com.iflytek.aiui.demo.chat.databinding.ChatItemBinding" />
+
+        <variable
+            name="handler"
+            type="com.iflytek.aiui.demo.chat.ui.chat.adapter.ItemListener" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layoutDirection="@{msg.getMessage().isFromUser()? LayoutDirection.RTL:LayoutDirection.LTR}"
+        android:padding="@dimen/bubble_item_padding"
+        android:paddingLeft="@{msg.getMessage().isFromUser()? @dimen/item_extra_padding:@dimen/chat_item_padding}"
+        android:paddingRight="@{msg.getMessage().isFromUser()? @dimen/chat_item_padding:@dimen/item_extra_padding}">
+
+        <ImageView
+            android:id="@+id/chat_item_header"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="fitCenter"
+            android:src="@{msg.getMessage().isFromUser()? @drawable/user:@drawable/aiui}" />
+
+        <com.iflytek.aiui.demo.chat.ui.view.ChatBubbleLayout
+            android:id="@+id/chat_item_layout_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:onClick="@{(view) -> handler.onMessageClick(msg)}"
+            app:bl_arrowHeight="14dp"
+            app:bl_arrowPosition="16dp"
+            app:bl_cornersRadius="18dp"
+            app:chatArrowDirection="@{msg.getMessage().isFromUser()? ArrowDirection.RIGHT:ArrowDirection.LEFT}"
+            app:chatBubbleColor="@{msg.getMessage().isFromUser()? @color/user_bubble_color:@color/aiui_bubble_color}">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/content_horizontal_margin">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="@{msg.getMessage().isText()? View.GONE: View.VISIBLE}">
+
+                    <TextView
+                        android:id="@+id/chat_item_voice_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:padding="2dp"
+                        android:paddingLeft="4dp"
+                        android:text='@{msg.getMessage().getAudioLen() + "s"}'
+                        android:textColor="@color/voice_time_color"
+                        android:visibility="@{(msg.getMessage().isText() || msg.getMessage().getAudioLen() ==0)? View.GONE: View.VISIBLE}" />
+
+                    <ImageView
+                        android:id="@+id/chat_item_voice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:padding="2dp"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/icon_voice_right3" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/chat_item_content_text"
+                        style="@style/text_subhead_black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:breakStrategy="simple"
+                        android:onClick="@{(view) -> handler.onMessageClick(msg)}"
+                        android:padding="2dp"
+                        android:textColor="@color/black"
+                        android:textDirection="ltr"
+                        android:visibility="@{msg.getMessage().isEmptyContent()? View.GONE:View.VISIBLE}" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|right"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/insight_padding"
+                        android:visibility="@{msg.getMessage().isFromUser() || (msg.getMessage().responseTime == 0) || (msg.getMessage().responseTime == -1) ? View.GONE: View.VISIBLE}">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_access_time_black_24dp"
+                            android:layout_marginRight="2dp"/>
+
+                        <TextView
+                            android:id="@+id/response_time_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:text='@{msg.getMessage().responseTime + "ms"}'
+                            android:textColor="@color/text_hint"
+                            android:textSize="8sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.iflytek.aiui.demo.chat.ui.view.ChatBubbleLayout>
+
+    </LinearLayout>
+</layout>

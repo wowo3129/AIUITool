@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/tools"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_net_test"
+            android:icon="@drawable/ic_network_check_black_24dp"
+            android:title="@string/nav_net_test" />
+        <item
+            android:id="@+id/nav_share_log"
+            android:icon="@drawable/ic_share_black_24dp"
+            android:title="@string/nav_send_log" />
+    </group>
+
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/settings">
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="@string/nav_settings" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_info_black_24dp"
+            android:title="@string/nav_about" />
+
+    </group>
+
+</menu>

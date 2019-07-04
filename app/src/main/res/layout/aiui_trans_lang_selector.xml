@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="trans"
+            type="com.iflytek.aiui.demo.chat.ui.chat.TranslationViewModel" />
+    </data>
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/trans_container"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/trans_selector_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:showIn="@layout/chat_fragment"
+            android:visibility="gone">
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/src_languege_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:layout_marginStart="12dp"
+                android:src="@drawable/arrow"
+                android:layout_width="24dp"
+                android:layout_height="24dp" />
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:layout_marginStart="12dp"
+                android:background="@color/bg_content"
+                android:id="@+id/dst_languege_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</layout>
